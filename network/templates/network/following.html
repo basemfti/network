@@ -1,0 +1,72 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<script>
+function likeHandeler(id,whoYouLiked){
+    const btn=document.getElementById(`${id}`);
+    btn.classList.remove('fa-thumbs-up')
+    btn.classList.remove('fa-thumbs-down')
+    if (whoYouLiked.indexOf(id) >= 0) {
+      var liked= true;
+     }
+     else {
+      var liked=false;
+     }
+     if (liked===true)
+     {
+      fetch(`/remove_like/${id}`)
+      .then(response => response.json)
+      .then(result => {
+        btn.classList.add("fa-thumbs-up")
+      })
+  
+     }
+     else {
+      fetch(`/remove_like/${id}`)
+      .then(response => response.json)
+      .then(result => {
+        btn.classList.add("fa-thumbs-down")
+      })
+  
+     }
+     liked=!liked
+  }
+  
+  </script>
+    <h1 class="text-center my-4">Following</h1>
+
+    <!-- All Posts Section -->
+    <div class="all-posts">
+        {% if posts_of_the_page %}
+            {% for post in posts_of_the_page %}
+            <div class="post my-3 mx-5 p-3 border rounded">
+                <h5><strong><a href="{% url 'profile' post.user.id %}">{{ post.user }}</a></strong></h5>
+                <p class="post-content">{{ post.content }}</p>
+                <small class="text-muted">{{ post.date }}</small>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info mx-5" role="alert">
+                No posts to display. Start following users to see their posts!
+            </div>
+        {% endif %}
+        
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-center">
+            {% if posts_of_the_page.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ posts_of_the_page.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ posts_of_the_page.number }} of {{ posts_of_the_page.paginator.num_pages }}</span>
+            </li>
+            
+            {% if posts_of_the_page.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ posts_of_the_page.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

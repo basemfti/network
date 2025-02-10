@@ -1,0 +1,70 @@
+h1 {
+  text-align: left;
+}
+:root {
+  --post-max-width: 600px;
+  --post-margin: 20px;
+  --post-border: 0.1px solid gray;
+  --post-padding: 15px;
+  --post-border-radius: 8px;
+}
+
+.all-posts {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: var(--post-margin);
+}
+
+.post {
+  border: var(--post-border);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: var(--post-max-width);
+  box-sizing: border-box;
+  padding: var(--post-padding);
+  border-radius: var(--post-border-radius);
+  margin-bottom: var(--post-margin);
+  background-color: #fff; /* Add a background color for better contrast */
+}
+
+/* Optional: Add hover effect for better interactivity */
+.post:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Optional: Add media query for responsiveness */
+@media (max-width: 768px) {
+  .post {
+    max-width: 100%;
+    margin: var(--post-margin) 0;
+  }
+}
+/* New Post Form Styling */
+.new-post {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.new-post textarea {
+  width: 100%;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Post Content Styling */
+.post-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+/* Date Styling */
+.text-muted {
+  font-size: 0.9rem;
+}
